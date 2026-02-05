@@ -1,3 +1,4 @@
+// this is header component
 import React from 'react';
 import { Stethoscope, FileText, PlusCircle, LogOut, Menu, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
