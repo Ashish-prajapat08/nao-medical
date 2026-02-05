@@ -1,20 +1,13 @@
 // this is header component
 import React from 'react';
-import { Stethoscope, FileText, PlusCircle, LogOut, Menu, User } from 'lucide-react';
+import { Stethoscope, FileText, PlusCircle, Menu } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 
 export default function Header({ role, language, otherUserLanguage, onNewChat, onGenerateSummary, onToggleSidebar }) {
     const navigate = useNavigate();
-    const { user, logout } = useAuth();
 
-    const handleLogout = async () => {
-        try {
-            await logout();
-            navigate('/login');
-        } catch (error) {
-            console.error('Logout failed', error);
-        }
+    const handleExit = () => {
+        navigate('/');
     };
 
     return (
@@ -42,10 +35,6 @@ export default function Header({ role, language, otherUserLanguage, onNewChat, o
                                 <span>•</span>
                                 <span className="uppercase font-medium" translate="no">{language} ➔ {otherUserLanguage || '...'}</span>
                             </div>
-                            <div className="flex items-center gap-1 opacity-70">
-                                <User size={10} />
-                                <span className="truncate max-w-[100px]">{user?.email}</span>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -66,14 +55,6 @@ export default function Header({ role, language, otherUserLanguage, onNewChat, o
                 >
                     <PlusCircle className="w-4 h-4" />
                     <span className="hidden sm:inline">New Chat</span>
-                </button>
-
-                <button
-                    onClick={handleLogout}
-                    className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors"
-                    title="Exit"
-                >
-                    <LogOut className="w-5 h-5" />
                 </button>
             </div>
         </header>

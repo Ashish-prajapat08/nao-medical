@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Stethoscope, User, ArrowRight, LogOut } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+import { Stethoscope, User, ArrowRight } from 'lucide-react';
 
 const LANGUAGES = [
     { code: 'en', name: 'English' },
@@ -15,7 +14,6 @@ export default function Home() {
     const [role, setRole] = useState(null);
     const [language, setLanguage] = useState('en');
     const navigate = useNavigate();
-    const { logout, user } = useAuth();
 
     useEffect(() => {
         // Load saved preferences
@@ -42,18 +40,11 @@ export default function Home() {
                     <div className="bg-blue-600 p-2 rounded-lg">
                         <Stethoscope className="w-5 h-5 text-white" />
                     </div>
-                    <button
-                        onClick={() => logout()}
-                        className="p-2 text-slate-400 hover:text-red-500 transition-colors"
-                        title="Log Out"
-                    >
-                        <LogOut size={20} />
-                    </button>
                 </div>
 
                 <div className="text-center space-y-2">
                     <h1 className="text-3xl font-bold text-slate-800">NAO Medical</h1>
-                    <p className="text-slate-500">Logged in as {user?.email}</p>
+                    <p className="text-slate-500">Welcome to AI Medical Consultation</p>
                 </div>
 
                 {/* Role Selection */}
