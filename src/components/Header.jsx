@@ -3,7 +3,7 @@ import { Stethoscope, FileText, PlusCircle, LogOut, Menu, User } from 'lucide-re
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-export default function Header({ role, language, onNewChat, onGenerateSummary, onToggleSidebar }) {
+export default function Header({ role, language, otherUserLanguage, onNewChat, onGenerateSummary, onToggleSidebar }) {
     const navigate = useNavigate();
     const { user, logout } = useAuth();
 
@@ -39,7 +39,7 @@ export default function Header({ role, language, onNewChat, onGenerateSummary, o
                                     {role}
                                 </span>
                                 <span>•</span>
-                                <span className="uppercase font-medium" translate="no">{language}</span>
+                                <span className="uppercase font-medium" translate="no">{language} ➔ {otherUserLanguage || '...'}</span>
                             </div>
                             <div className="flex items-center gap-1 opacity-70">
                                 <User size={10} />

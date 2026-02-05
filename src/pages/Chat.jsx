@@ -35,10 +35,10 @@ export default function Chat() {
                     ? data.patientLanguage
                     : data.doctorLanguage;
                 // If the other person hasn't set a language yet, 
-                // we'll assume a default based on the common scenario (Doctor=en, Patient=hi)
-                const fallback = role === 'DOCTOR' ? 'hi' : 'en';
-                setOtherUserLanguage(targetLang || fallback);
-                console.log(`Target language updated to: ${targetLang || fallback}`);
+                // we'll wait for it or use a safer 'auto' or 'en' fallback
+                // Removed the hardcoded 'hi'/'en' fallback that was confusing tests
+                setOtherUserLanguage(targetLang || 'en');
+                console.log(`Target language updated to: ${targetLang || 'en'}`);
             }
         });
 
@@ -89,7 +89,7 @@ export default function Chat() {
             unsubscribe();
             setIsSending(false); // Reset sending state on cleanup
         };
-    }, [roomId]);
+    }, [roomId, role, language]);
 
     const handleSendMessage = async (text) => {
         if (!roomId) {
@@ -222,6 +222,7 @@ export default function Chat() {
             <Header
                 role={role}
                 language={language}
+                otherUserLanguage={otherUserLanguage}
                 onNewChat={startNewChat}
                 onGenerateSummary={() => setShowSummary(true)}
                 onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
